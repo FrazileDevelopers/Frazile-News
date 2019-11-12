@@ -15,6 +15,7 @@ dependencies:
   # dio:
   connectivity:
   rxdart:
+  flutter_spinkit:
 
 dev_dependencies:
   flutter_test:

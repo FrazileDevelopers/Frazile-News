@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:newswebapp/services/responses.dart';
 
 import 'homeBloc.dart';
@@ -29,8 +30,9 @@ class _HomePageState extends State<HomePage> {
           title: Text('Daily News'),
         ),
         body: StreamBuilder(
-            stream: _homeBloc.allnews,
-            builder: (context, AsyncSnapshot<NewsResponse> snapshot) {
+          stream: _homeBloc.allnews,
+          builder: (context, AsyncSnapshot<NewsResponse> snapshot) {
+            if (snapshot.hasData)
               return ListView.separated(
                 physics: BouncingScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
@@ -48,6 +50,28 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.grey,
                 ),
               );
-            }),
+
+            if (snapshot.connectionState != ConnectionState.done)
+              return Center(
+                child: SpinKitCubeGrid(
+                  size: 70.0,
+                  itemBuilder: (context, index) => DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          const Color(0xFFF6356F),
+                          const Color(0xFFFF5F50)
+                        ],
+                        tileMode: TileMode.clamp,
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        stops: [0.0, 1.0],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+          },
+        ),
       );
 }
