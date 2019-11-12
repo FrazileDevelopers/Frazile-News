@@ -38,15 +38,14 @@ class _HomePageState extends State<HomePage> {
                 physics: BouncingScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage:
-                          snapshot.data.articles[index].urlToImage != null
-                              ? NetworkImage(
-                                  snapshot.data.articles[index].urlToImage)
-                              : Container(
-                                  color: Colors.pink,
-                                ),
-                    ),
+                    leading: snapshot.data.articles[index].urlToImage != null
+                        ? CircleAvatar(
+                            backgroundImage: NetworkImage(
+                                snapshot.data.articles[index].urlToImage),
+                          )
+                        : Container(
+                            color: Colors.pink,
+                          ),
                     title: snapshot.data.articles[index].title != null
                         ? Text(snapshot.data.articles[index].title)
                         : Container(),
@@ -65,6 +64,8 @@ class _HomePageState extends State<HomePage> {
               return Center(
                 child: FzNews().gradientLoader(),
               );
+
+            return Container();
           },
         ),
       );
