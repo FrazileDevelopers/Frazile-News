@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:newswebapp/constants/FzNews.dart';
 import 'package:newswebapp/services/responses.dart';
 
 import 'homeBloc.dart';
@@ -53,23 +54,7 @@ class _HomePageState extends State<HomePage> {
 
             if (snapshot.connectionState != ConnectionState.done)
               return Center(
-                child: SpinKitCubeGrid(
-                  size: 70.0,
-                  itemBuilder: (context, index) => DecoratedBox(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          const Color(0xFFF6356F),
-                          const Color(0xFFFF5F50)
-                        ],
-                        tileMode: TileMode.clamp,
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        stops: [0.0, 1.0],
-                      ),
-                    ),
-                  ),
-                ),
+                child: FzNews().gradientLoader(),
               );
           },
         ),
