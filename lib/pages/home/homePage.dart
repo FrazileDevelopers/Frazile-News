@@ -34,7 +34,14 @@ class _HomePageState extends State<HomePage> {
               return ListView.separated(
                 physics: BouncingScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
-                  return ListTile();
+                  return ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          snapshot.data.articles[index].urlToImage),
+                    ),
+                    title: Text(snapshot.data.articles[index].title),
+                    subtitle: Text(snapshot.data.articles[index].author),
+                  );
                 },
                 itemCount: snapshot.data.articles.length,
                 separatorBuilder: (BuildContext context, int index) => Divider(
