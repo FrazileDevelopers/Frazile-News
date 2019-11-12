@@ -39,11 +39,20 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
                     leading: CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          snapshot.data.articles[index].urlToImage),
+                      backgroundImage:
+                          snapshot.data.articles[index].urlToImage != null
+                              ? NetworkImage(
+                                  snapshot.data.articles[index].urlToImage)
+                              : Container(
+                                  color: Colors.pink,
+                                ),
                     ),
-                    title: Text(snapshot.data.articles[index].title),
-                    subtitle: Text(snapshot.data.articles[index].author),
+                    title: snapshot.data.articles[index].title != null
+                        ? Text(snapshot.data.articles[index].title)
+                        : Container(),
+                    subtitle: snapshot.data.articles[index].author != null
+                        ? Text(snapshot.data.articles[index].author)
+                        : Container(),
                   );
                 },
                 itemCount: snapshot.data.articles.length,
